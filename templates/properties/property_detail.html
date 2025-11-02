@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ property.title }} - Real Estate Management{% endblock %}
+
+{% block content %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'properties:property_list' %}">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ property.title }}</li>
+  </ol>
+</nav>
+
+<div class="row">
+  <div class="col-lg-8">
+    <div class="card mb-4">
+      {% if property.featured_image %}
+      <img src="{{ property.featured_image.url }}" class="card-img-top img-fluid" alt="{{ property.title }}">
+      {% else %}
+      <img src="{% static 'images/placeholder-property.jpg' %}" class="card-img-top img-fluid" alt="{{ property.title }}">
+      {% endif %}
+      <div class="card-body">
+        <h1 class="h3">{{ property.title }}</h1>
+        <p class="text-muted"><i class="fas fa-map-marker-alt"></i> {{ property.address }}, {{ property.city }}, {{ property.state }}</p>
+        <div class="mb-3">
+          <span class="badge bg-info me-1">{{ property.get_property_type_display }}</span>
+          <span class="badge bg-success">{{ property.get_status_display }}</span>
+        </div>
+        <p>{{ property.description|linebreaks }}</p>
+      </div>
+    </div>
+
+    {% if images %}
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="card-title">Gallery</h5>
+        <div class="row row-cols-2 row-cols-md-4 g-2">
+          {% for img in images %}
+          <div class="col">
+            <img src="{{ img.image.url }}" class="img-thumbnail img-hover-zoom" alt="{{ img.caption }}">
+            {% if img.caption %}<small class="d-block text-muted">{{ img.caption }}</small>{% endif %}
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+  </div>
+
+  <div class="col-lg-4">
+    <div class="card mb-3 sticky-top">
+      <div class="card-body text-center">
+        <h2 class="text-primary">{{ property.formatted_price }}</h2>
+        <p class="mb-1"><strong>Listed by:</strong> {{ property.owner.username }}</p>
+        <p class="text-muted">Status: {{ property.get_status_display }}</p>
+      </div>
+    </div>
+
+    <div class="card mb-3">
+      <div class="card-header">Specifications</div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">Type: {{ property.get_property_type_display }}</li>
+        <li class="list-group-item">Bedrooms: {{ property.bedrooms }}</li>
+        <li class="list-group-item">Bathrooms: {{ property.bathrooms }}</li>
+        <li class="list-group-item">Area: {{ property.area }} sq ft</li>
+      </ul>
+    </div>
+
+    <div class="card mb-3">
+      <div class="card-header">Location</div>
+      <div class="card-body">
+        <p class="mb-1">{{ property.address }}</p>
+        <p class="mb-1">{{ property.city }}, {{ property.state }} {{ property.zipcode }}</p>
+      </div>
+    </div>
+
+    <!-- Inquiry / Contact Card -->
+    <div class="card mb-3">
+      <div class="card-header">Interested in this property?</div>
+      <div class="card-body">
+        {% if user.is_authenticated %}
+          {% if is_owner %}
+            <p class="mb-2">This is your property listing.</p>
+            <a href="{% url 'properties:inquiry_list' %}?filter=received" class="btn btn-primary w-100">
+              View Inquiries{% if inquiry_count %} <span class="badge bg-warning ms-2">{{ inquiry_count }}</span>{% endif %}
+            </a>
+          {% else %}
+            <h6 class="mb-3">Send an Inquiry</h6>
+            <form method="post" action="{% url 'properties:inquiry_create' property.pk %}" id="inquiryForm">
+              {% csrf_token %}
+              {% if inquiry_form.non_field_errors %}
+                <div class="text-danger mb-2">{{ inquiry_form.non_field_errors }}</div>
+              {% endif %}
+              <div class="mb-3">
+                {{ inquiry_form.name.label_tag }}
+                {{ inquiry_form.name }}
+                {% if inquiry_form.name.errors %}<div class="text-danger">{{ inquiry_form.name.errors }}</div>{% endif %}
+              </div>
+              <div class="mb-3">
+                {{ inquiry_form.email.label_tag }}
+                {{ inquiry_form.email }}
+                {% if inquiry_form.email.errors %}<div class="text-danger">{{ inquiry_form.email.errors }}</div>{% endif %}
+              </div>
+              <div class="mb-3">
+                {{ inquiry_form.phone.label_tag }}
+                {{ inquiry_form.phone }}
+                {% if inquiry_form.phone.errors %}<div class="text-danger">{{ inquiry_form.phone.errors }}</div>{% endif %}
+              </div>
+              <div class="mb-3">
+                {{ inquiry_form.message.label_tag }}
+                {{ inquiry_form.message }}
+                {% if inquiry_form.message.errors %}<div class="text-danger">{{ inquiry_form.message.errors }}</div>{% endif %}
+              </div>
+              <button type="submit" class="btn btn-primary w-100"><i class="fas fa-envelope"></i> Send Inquiry</button>
+              <small class="form-text text-muted mt-2">The property owner will receive your message via email.</small>
+            </form>
+          {% endif %}
+        {% else %}
+          <div class="alert alert-info mb-2">Please log in to contact the property owner.</div>
+          <a href="{% url 'accounts:login' %}?next={{ request.path }}" class="btn btn-primary w-100 mb-2">Login to Inquire</a>
+          <div class="text-center"><small>Don't have an account? <a href="{% url 'accounts:register' %}">Register here</a></small></div>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <h6>Metadata</h6>
+        <p class="mb-1">Listed: {{ property.created_at|date:"F d, Y" }}</p>
+        <p class="mb-0">Updated: {{ property.updated_at|date:"F d, Y" }}</p>
+      </div>
+    </div>
+
+    <div class="mt-3">
+      {% if is_owner %}
+        <a href="{% url 'properties:property_update' property.pk %}" class="btn btn-warning w-100 mb-2">Edit</a>
+        <a href="{% url 'properties:property_delete' property.pk %}" class="btn btn-danger w-100">Delete</a>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}

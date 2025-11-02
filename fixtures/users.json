@@ -1,0 +1,77 @@
+[
+  {
+    "model": "auth.user",
+    "pk": 1,
+    "fields": {
+      "username": "admin",
+      "first_name": "Admin",
+      "last_name": "User",
+      "email": "admin@realestate.com",
+      "password": "pbkdf2_sha256$260000$3Kz9kBcGJvXS$5Kv+9Nz0q4/3kR3DRz+DvzQh0LgX0xhG5cy3HY4Q1Qw=",
+      "is_staff": true,
+      "is_superuser": true,
+      "is_active": true,
+      "date_joined": "2024-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 2,
+    "fields": {
+      "username": "john_agent",
+      "first_name": "John",
+      "last_name": "Smith",
+      "email": "john@realestate.com",
+      "password": "pbkdf2_sha256$260000$pM3K8vQxjY7s$U/2qyh8eGhUFJp0FGM4VyJlRvmdwJl2M8q+PY1kJ3zM=",
+      "is_staff": false,
+      "is_superuser": false,
+      "is_active": true,
+      "date_joined": "2024-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 3,
+    "fields": {
+      "username": "sarah_agent",
+      "first_name": "Sarah",
+      "last_name": "Johnson",
+      "email": "sarah@realestate.com",
+      "password": "pbkdf2_sha256$260000$pM3K8vQxjY7s$U/2qyh8eGhUFJp0FGM4VyJlRvmdwJl2M8q+PY1kJ3zM=",
+      "is_staff": false,
+      "is_superuser": false,
+      "is_active": true,
+      "date_joined": "2024-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 4,
+    "fields": {
+      "username": "mike_buyer",
+      "first_name": "Mike",
+      "last_name": "Davis",
+      "email": "mike@example.com",
+      "password": "pbkdf2_sha256$260000$L9xK7vRzP4Ws$X2J5k8U6f+QH/2y9J3i+YZ3y8K4Q5V2M8q+PY1kJ3zM=",
+      "is_staff": false,
+      "is_superuser": false,
+      "is_active": true,
+      "date_joined": "2024-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 5,
+    "fields": {
+      "username": "emma_buyer",
+      "first_name": "Emma",
+      "last_name": "Wilson",
+      "email": "emma@example.com",
+      "password": "pbkdf2_sha256$260000$L9xK7vRzP4Ws$X2J5k8U6f+QH/2y9J3i+YZ3y8K4Q5V2M8q+PY1kJ3zM=",
+      "is_staff": false,
+      "is_superuser": false,
+      "is_active": true,
+      "date_joined": "2024-01-01T00:00:00Z"
+    }
+  }
+]

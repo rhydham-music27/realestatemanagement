@@ -1,0 +1,62 @@
+[
+  {
+    "model": "accounts.userprofile",
+    "pk": 1,
+    "fields": {
+      "user": 1,
+      "role": "AGENT",
+      "phone": "555-0100",
+      "bio": "System Administrator",
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "accounts.userprofile",
+    "pk": 2,
+    "fields": {
+      "user": 2,
+      "role": "AGENT",
+      "phone": "555-0101",
+      "bio": "Experienced real estate agent specializing in residential properties. 10+ years in the industry.",
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "accounts.userprofile",
+    "pk": 3,
+    "fields": {
+      "user": 3,
+      "role": "AGENT",
+      "phone": "555-0102",
+      "bio": "Commercial real estate specialist with expertise in office spaces and retail properties.",
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "accounts.userprofile",
+    "pk": 4,
+    "fields": {
+      "user": 4,
+      "role": "BUYER",
+      "phone": "555-0103",
+      "bio": "First-time home buyer looking for a family home.",
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "accounts.userprofile",
+    "pk": 5,
+    "fields": {
+      "user": 5,
+      "role": "BUYER",
+      "phone": "555-0104",
+      "bio": "Investor interested in rental properties.",
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-01-01T00:00:00Z"
+    }
+  }
+]

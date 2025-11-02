@@ -1,0 +1,9 @@
+# Core dependencies
+# Django 4.2 LTS (allow minor/patch updates)
+Django>=4.2,<5.0
+# Pillow is required for image handling (ImageField, thumbnails, etc.)
+Pillow>=10.0.0
+
+# Development / optional
+# Use python-decouple to manage environment variables and secrets in development/production.
+python-decouple>=3.8

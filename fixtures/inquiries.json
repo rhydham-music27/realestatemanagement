@@ -1,0 +1,142 @@
+[
+  {
+    "model": "properties.inquiry",
+    "pk": 1,
+    "fields": {
+      "related_property": 1,
+      "user": 4,
+      "name": "Mike Davis",
+      "email": "mike@example.com",
+      "phone": "555-0103",
+      "message": "I'm very interested in this luxury villa. The smart home features and mountain views are exactly what I'm looking for. Could we schedule a viewing this weekend? I'd also like to know more about the pool maintenance and HOA fees if any.",
+      "created_at": "2024-02-17T10:30:00Z",
+      "is_read": true
+    }
+  },
+  {
+    "model": "properties.inquiry",
+    "pk": 2,
+    "fields": {
+      "related_property": 2,
+      "user": 4,
+      "name": "Mike Davis",
+      "email": "mike@example.com",
+      "phone": "555-0103",
+      "message": "Is this property still available? I'm relocating to New York for work and this loft looks perfect. What's included in the building amenities? Are pets allowed? Also, what's the monthly HOA fee?",
+      "created_at": "2024-02-18T14:15:00Z",
+      "is_read": false
+    }
+  },
+  {
+    "model": "properties.inquiry",
+    "pk": 3,
+    "fields": {
+      "related_property": 3,
+      "user": 4,
+      "name": "Mike Davis",
+      "email": "mike@example.com",
+      "phone": "555-0103",
+      "message": "We're a family of four looking for a home in Austin. This property looks ideal with the large backyard. Can you provide more information about the school district? Also, when was the roof last replaced and what's the condition of the HVAC system?",
+      "created_at": "2024-02-19T09:45:00Z",
+      "is_read": true
+    }
+  },
+  {
+    "model": "properties.inquiry",
+    "pk": 4,
+    "fields": {
+      "related_property": 6,
+      "user": 4,
+      "name": "Mike Davis",
+      "email": "mike@example.com",
+      "phone": "555-0103",
+      "message": "I'm interested in this cabin as a weekend getaway property. Is the road accessible year-round, especially during winter? What are the annual property taxes and maintenance costs? Can it be used as a short-term rental?",
+      "created_at": "2024-02-20T11:20:00Z",
+      "is_read": false
+    }
+  },
+  {
+    "model": "properties.inquiry",
+    "pk": 5,
+    "fields": {
+      "related_property": 10,
+      "user": 4,
+      "name": "Mike Davis",
+      "email": "mike@example.com",
+      "phone": "555-0103",
+      "message": "Love the modern design and rooftop deck! Is the 2-car garage heated? What's the HOA fee and what does it cover? I'd like to schedule a viewing next week if possible.",
+      "created_at": "2024-02-21T16:00:00Z",
+      "is_read": true
+    }
+  },
+  {
+    "model": "properties.inquiry",
+    "pk": 6,
+    "fields": {
+      "related_property": 12,
+      "user": 4,
+      "name": "Mike Davis",
+      "email": "mike@example.com",
+      "phone": "555-0103",
+      "message": "I see this property is pending. If the current deal falls through, I'd be very interested. We're looking for a single-story home in Phoenix. Please keep me informed of any status changes.",
+      "created_at": "2024-02-22T13:30:00Z",
+      "is_read": false
+    }
+  },
+  {
+    "model": "properties.inquiry",
+    "pk": 7,
+    "fields": {
+      "related_property": 4,
+      "user": 5,
+      "name": "Emma Wilson",
+      "email": "emma@example.com",
+      "phone": "555-0104",
+      "message": "I'm interested in this condo as an investment property. What are the rental restrictions in the building? Can it be rented short-term? What's the average rental income for similar units? Also, what's included in the HOA fees?",
+      "created_at": "2024-02-18T15:45:00Z",
+      "is_read": false
+    }
+  },
+  {
+    "model": "properties.inquiry",
+    "pk": 8,
+    "fields": {
+      "related_property": 9,
+      "user": 5,
+      "name": "Emma Wilson",
+      "email": "emma@example.com",
+      "phone": "555-0104",
+      "message": "I'm opening a boutique clothing store and this location looks ideal. Can we discuss the lease terms? Is there any tenant improvement allowance? What's the average foot traffic in this area? I'd like to schedule a walkthrough.",
+      "created_at": "2024-02-19T10:30:00Z",
+      "is_read": true
+    }
+  },
+  {
+    "model": "properties.inquiry",
+    "pk": 9,
+    "fields": {
+      "related_property": 7,
+      "user": 5,
+      "name": "Emma Wilson",
+      "email": "emma@example.com",
+      "phone": "555-0104",
+      "message": "Looking for a rental property investment in San Francisco. Is the building pet-friendly? What utilities are included? What's the current rental market rate for studios in this area? Any rent control restrictions?",
+      "created_at": "2024-02-20T14:00:00Z",
+      "is_read": true
+    }
+  },
+  {
+    "model": "properties.inquiry",
+    "pk": 10,
+    "fields": {
+      "related_property": 13,
+      "user": 5,
+      "name": "Emma Wilson",
+      "email": "emma@example.com",
+      "phone": "555-0104",
+      "message": "This brownstone is absolutely stunning! I love the historic details combined with modern updates. Are there any historic preservation restrictions? What's the annual property tax? I'm very interested and would like to schedule a viewing as soon as possible.",
+      "created_at": "2024-02-21T11:15:00Z",
+      "is_read": false
+    }
+  }
+]

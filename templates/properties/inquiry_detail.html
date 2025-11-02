@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Inquiry Details - Real Estate Management{% endblock %}
+
+{% block content %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'properties:property_list' %}">Home</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'properties:inquiry_list' %}">Inquiries</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Inquiry Details</li>
+  </ol>
+</nav>
+
+<div class="row">
+  <div class="col-lg-8">
+    <div class="card inquiry-detail-card mb-4">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">Inquiry Details</h5>
+        {% if inquiry.is_read %}
+          <span class="badge bg-success">Read</span>
+        {% else %}
+          <span class="badge bg-warning">New</span>
+        {% endif %}
+      </div>
+      <div class="card-body">
+        <h6>About Property</h6>
+        <p><a href="{% url 'properties:property_detail' inquiry.property.pk %}">{{ inquiry.property.title }}</a></p>
+        <p class="mb-2">Listed by: {{ inquiry.property.owner.username }}</p>
+
+        <hr>
+
+        <h6>From</h6>
+        <p><strong>{{ inquiry.name }}</strong> &middot; <small class="text-muted">@{{ inquiry.user.username }}</small></p>
+        <p class="mb-1">Email: <a href="mailto:{{ inquiry.email }}">{{ inquiry.email }}</a></p>
+        {% if inquiry.phone %}
+        <p class="mb-1">Phone: <a href="tel:{{ inquiry.phone }}">{{ inquiry.phone }}</a></p>
+        {% endif %}
+
+        <hr>
+
+        <h6>Message</h6>
+        <div class="inquiry-message mb-3">{{ inquiry.message|linebreaks }}</div>
+
+        <p class="inquiry-meta text-muted">Sent on {{ inquiry.created_at|date:"F d, Y g:i A" }} &middot; {{ inquiry.created_at|timesince }} ago</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-4">
+    <div class="card mb-3">
+      <div class="card-header">Actions</div>
+      <div class="card-body">
+        <a href="{% url 'properties:property_detail' inquiry.property.pk %}" class="btn btn-outline-secondary w-100 mb-2">View Property</a>
+        {% if user.is_authenticated and user == inquiry.property.owner %}
+          <a href="mailto:{{ inquiry.email }}?subject=Re: {{ inquiry.property.title }}" class="btn btn-primary w-100 mb-2">Reply via Email</a>
+          <a href="{% url 'properties:inquiry_list' %}?filter=received" class="btn btn-sm btn-outline-primary w-100">Back to Inquiries</a>
+        {% elif user.is_authenticated and user == inquiry.user %}
+          <a href="mailto:{{ inquiry.property.owner.email }}?subject=Re: {{ inquiry.property.title }}" class="btn btn-primary w-100 mb-2">Contact Owner</a>
+          <a href="{% url 'properties:inquiry_list' %}?filter=sent" class="btn btn-sm btn-outline-primary w-100">Back to My Inquiries</a>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <h6>Inquiry Summary</h6>
+        <p class="mb-1">Property: <a href="{% url 'properties:property_detail' inquiry.property.pk %}">{{ inquiry.property.title }}</a></p>
+        <p class="mb-1">From: {{ inquiry.name }} ({{ inquiry.user.username }})</p>
+        <p class="mb-0">Status: {% if inquiry.is_read %}Read{% else %}Unread{% endif %}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

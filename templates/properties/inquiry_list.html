@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}My Inquiries - Real Estate Management{% endblock %}
+
+{% block content %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'properties:property_list' %}">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Inquiries</li>
+  </ol>
+</nav>
+
+<div class="container">
+  <h1 class="h3 mb-3">My Inquiries</h1>
+
+  <ul class="nav nav-tabs inquiry-tabs mb-3">
+    <li class="nav-item">
+      <a class="nav-link {% if filter_type == 'received' %}active{% endif %}" href="{% url 'properties:inquiry_list' %}?filter=received">
+        Received <span class="badge bg-secondary ms-2">{{ received_count }}</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link {% if filter_type == 'sent' %}active{% endif %}" href="{% url 'properties:inquiry_list' %}?filter=sent">
+        Sent <span class="badge bg-secondary ms-2">{{ sent_count }}</span>
+      </a>
+    </li>
+  </ul>
+
+  {% if inquiries %}
+  <div class="card">
+    <div class="list-group list-group-flush">
+      {% for inquiry in inquiries %}
+      <div class="list-group-item inquiry-item {% if not inquiry.is_read and filter_type == 'received' %}unread{% endif %}">
+        <div class="row">
+          <div class="col-md-9">
+            <h6 class="mb-1">
+              {% if filter_type == 'sent' %}
+                <a href="{% url 'properties:property_detail' inquiry.property.pk %}">{{ inquiry.property.title }}</a>
+              {% else %}
+                <strong>{{ inquiry.name }}</strong> &middot; <a href="{% url 'properties:property_detail' inquiry.property.pk %}">{{ inquiry.property.title }}</a>
+              {% endif %}
+              {% if not inquiry.is_read and filter_type == 'received' %}<span class="badge bg-warning ms-2">New</span>{% endif %}
+            </h6>
+            <p class="mb-1 text-truncate-2">{{ inquiry.message }}</p>
+            <small class="text-muted">{{ inquiry.created_at|date:"F d, Y g:i A" }}</small>
+          </div>
+          <div class="col-md-3 text-md-end mt-2 mt-md-0">
+            <a href="{% url 'properties:inquiry_detail' inquiry.pk %}" class="btn btn-sm btn-outline-primary">View Details</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  {% if is_paginated %}
+  <nav aria-label="Inquiry pagination" class="mt-3">
+    <ul class="pagination">
+      {% if page_obj.has_previous %}
+      <li class="page-item">
+        <a class="page-link" href="?filter={{ filter_type }}&page={{ page_obj.previous_page_number }}">Previous</a>
+      </li>
+      {% endif %}
+      {% for num in paginator.page_range %}
+        {% if page_obj.number == num %}
+          <li class="page-item active"><span class="page-link">{{ num }}</span></li>
+        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+          <li class="page-item"><a class="page-link" href="?filter={{ filter_type }}&page={{ num }}">{{ num }}</a></li>
+        {% endif %}
+      {% endfor %}
+      {% if page_obj.has_next %}
+      <li class="page-item">
+        <a class="page-link" href="?filter={{ filter_type }}&page={{ page_obj.next_page_number }}">Next</a>
+      </li>
+      {% endif %}
+    </ul>
+  </nav>
+  {% endif %}
+
+  {% else %}
+  <div class="card inquiry-empty-state p-4 text-center">
+    <i class="fas fa-envelope-open-text mb-3"></i>
+    {% if filter_type == 'sent' %}
+      <p class="mb-3">You haven't sent any inquiries yet. <a href="{% url 'properties:property_list' %}">Browse properties</a> to get started.</p>
+    {% else %}
+      <p class="mb-3">You haven't received any inquiries yet. Share your property listings to get inquiries!</p>
+    {% endif %}
+    <a href="{% url 'properties:property_list' %}" class="btn btn-outline-primary">Browse Properties</a>
+  </div>
+  {% endif %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Delete Property - Real Estate Management{% endblock %}
+
+{% block content %}
+<div class="mb-4">
+    <h1 class="h3 text-danger"><i class="fas fa-exclamation-triangle"></i> Confirm Deletion</h1>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'properties:property_list' %}">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Delete</li>
+      </ol>
+    </nav>
+</div>
+
+<div class="card border-danger">
+  <div class="card-header bg-danger text-white">Delete Property</div>
+  <div class="card-body">
+    <div class="alert alert-danger">
+      <strong>Warning:</strong> Are you sure you want to delete this property? This action cannot be undone.
+    </div>
+
+    <h4>{{ property.title }}</h4>
+    {% if property.featured_image %}
+      <img src="{{ property.featured_image.url }}" class="img-thumbnail mb-3" width="250">
+    {% endif %}
+
+    <ul class="list-unstyled">
+      <li><strong>Location:</strong> {{ property.city }}, {{ property.state }}</li>
+      <li><strong>Price:</strong> {{ property.formatted_price }}</li>
+      <li><strong>Type:</strong> {{ property.get_property_type_display }}</li>
+      <li><strong>Bedrooms/Bathrooms:</strong> {{ property.bedrooms }} / {{ property.bathrooms }}</li>
+    </ul>
+
+    {% if property.images.count %}
+      <p class="text-muted">This will also delete {{ property.images.count }} image(s) associated with this property.</p>
+    {% endif %}
+
+    <form method="post">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i> Yes, Delete Property</button>
+      <a href="{% url 'properties:property_detail' property.pk %}" class="btn btn-secondary">No, Keep Property</a>
+    </form>
+  </div>
+</div>
+
+{% endblock %}
