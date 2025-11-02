@@ -69,7 +69,7 @@ A Django-based real estate management system with property listings, user authen
 
 5. Load sample data (optional):
    ```bash
-   python manage.py loaddata users profiles properties inquiries
+   python manage.py loaddata fixtures/users.json fixtures/profiles.json fixtures/properties.json fixtures/inquiries.json
    ```
 
 6. Create superuser:
