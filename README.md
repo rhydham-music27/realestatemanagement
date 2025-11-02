@@ -45,7 +45,7 @@ A Django-based real estate management system with property listings, user authen
 1. Clone the repository:
    ```bash
    git clone <repository-url>
-   cd vasusharma
+   cd realestatemanagement
    ```
 
 2. Create and activate virtual environment:
